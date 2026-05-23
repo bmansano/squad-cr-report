@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Squad C&R — 360 Overview Report · Q2 2026</title>
+
+  <!-- ============================================================
+       SQUAD C&R · 360 OVERVIEW REPORT
+       Responsável: Bruno Mansano | Referência: SYNC Q2 Overview
+       Gerado em: Maio 2026
+       ============================================================ -->
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Radius (independente de tema) ── */
+    :root {
+      --radius:    10px;
+      --radius-sm: 6px;
+    }
+
+    /* ════════════════════════════════════════
+       TEMA ESCURO (padrão)
+       Fundo: pretos e cinzas escuros — sem azul/roxo estrutural
+    ════════════════════════════════════════ */
+    html, html[data-theme="dark"] {
+      --bg:          #111111;
+      --surface:     #1a1a1a;
+      --surface-2:   #222222;
+      --surface-3:   #2a2a2a;
+      --border:      #333333;
+      --text:        #e8e8e8;
+      --text-muted:  #888888;
+      --text-dim:    #555555;
+
+      --green:       #22c55e;
+      --green-bg:    rgba(34,197,94,.12);
+      --yellow:      #f59e0b;
+      --yellow-bg:   rgba(245,158,11,.12);
+      --red:         #ef4444;
+      --red-bg:      rgba(239,68,68,.12);
+      --blue:        #3b82f6;
+      --blue-bg:     rgba(59,130,246,.12);
+      --purple:      #a855f7;
+      --purple-bg:   rgba(168,85,247,.12);
+      --gray:        #6b7280;
+      --gray-bg:     rgba(107,114,128,.12);
+
+      /* Variáveis estruturais — sem azul/roxo no chrome */
+      --header-bg:            linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+      --hero-bg:              linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+      --hero-h1-gradient:     linear-gradient(90deg, #e8e8e8 0%, #aaaaaa 100%);
+      --squad-badge-bg:       linear-gradient(135deg, #2a2a2a, #383838);
+      --squad-badge-color:    #cccccc;
+      --accent:               #dddddd;
+      --accent-border:        #666666;
+      --mission-bg:           #1a1a1a;
+      --mission-border-color: #333333;
+      --mission-title-color:  #cccccc;
+    }
+
+    /* ════════════════════════════════════════
+       TEMA CLARO
+    ════════════════════════════════════════ */
+    html[data-theme="light"] {
+      --bg:          #f4f4f6;
+      --surface:     #ffffff;
+      --surface-2:   #efeff3;
+      --surface-3:   #e4e4ea;
+      --border:      #d4d4de;
+      --text:        #111122;
+      --text-muted:  #5a5a78;
+      --text-dim:    #9898b8;
+
+      --green:       #15803d;
+      --green-bg:    rgba(21,128,61,.09);
+      --yellow:      #b45309;
+      --yellow-bg:   rgba(180,83,9,.09);
+      --red:         #dc2626;
+      --red-bg:      rgba(220,38,38,.09);
+      --blue:        #1d4ed8;
+      --blue-bg:     rgba(29,78,216,.09);
+      --purple:      #6d28d9;
+      --purple-bg:   rgba(109,40,217,.09);
+      --gray:        #6b7280;
+      --gray-bg:     rgba(107,114,128,.09);
+
+      /* Variáveis estruturais — claro */
+      --header-bg:            linear-gradient(135deg, #ffffff 0%, #f4f4f6 100%);
+      --hero-bg:              linear-gradient(135deg, #ffffff 0%, #eeeef4 100%);
+      --hero-h1-gradient:     linear-gradient(90deg, #111122 0%, #5a5a78 100%);
+      --squad-badge-bg:       linear-gradient(135deg, #1d4ed8, #6d28d9);
+      --squad-badge-color:    #ffffff;
+      --accent:               #1d4ed8;
+      --accent-border:        #1d4ed8;
+      --mission-bg:           linear-gradient(135deg, rgba(109,40,217,.05) 0%, rgba(29,78,216,.05) 100%);
+      --mission-border-color: rgba(109,40,217,.22);
+      --mission-title-color:  #6d28d9;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    /* Transição suave ao trocar de tema */
+    body, .site-header, .nav-bar, .hero, .product-card,
+    .priority-card, .bug-counter, .risk-card, .mission-card,
+    .roadmap-table-wrap, table, .site-footer, .subtask,
+    .kpi-card, .note-item, .sev0-card, .risk-action, .alert-banner {
+      transition: background .25s, border-color .25s, color .2s;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Botão de alternância de tema ─────────────────────────── */
+    #theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+
+    #theme-toggle:hover {
+      background: var(--surface-3);
+      color: var(--text);
+      border-color: var(--text-dim);
+    }
+
+    #theme-toggle .toggle-icon { font-size: 15px; line-height: 1; }
+    #theme-toggle .toggle-label { font-size: 12px; }
+
+    /* ── Layout ───────────────────────────────────────────────── */
+    .page-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Header ───────────────────────────────────────────────── */
+    .site-header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background .3s;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-left { display: flex; align-items: center; gap: 14px; }
+
+    .squad-badge {
+      background: var(--squad-badge-bg);
+      color: var(--squad-badge-color);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: background .3s, color .3s;
+    }
+
+    .header-title { font-size: 17px; font-weight: 700; }
+    .header-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Navigation ───────────────────────────────────────────── */
+    .nav-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 2px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 11px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    .nav-link:hover { color: var(--text); text-decoration: none; border-color: var(--border); }
+    .nav-link.active { color: var(--accent); border-color: var(--accent-border); }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      background: var(--hero-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin: 32px 0 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      transition: background .3s;
+    }
+
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--hero-h1-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-size: 15px;
+      max-width: 560px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 12px;
+    }
+
+    .kpi-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .kpi-value { font-size: 26px; font-weight: 800; line-height: 1; }
+    .kpi-label { font-size: 10px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .05em; }
+
+    /* ── Section ──────────────────────────────────────────────── */
+    .section { margin-bottom: 40px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .section-title { font-size: 18px; font-weight: 700; }
+    .section-desc { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .section-number { font-size: 11px; font-weight: 700; color: var(--text-dim); margin-left: auto; letter-spacing: .1em; }
+
+    /* ── Badges ───────────────────────────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .03em;
+      white-space: nowrap;
+    }
+
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .badge-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid rgba(34,197,94,.25); }
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid rgba(245,158,11,.25); }
+    .badge-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid rgba(239,68,68,.25); }
+    .badge-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid rgba(59,130,246,.25); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid rgba(168,85,247,.25); }
+    .badge-gray   { background: var(--gray-bg);   color: var(--gray);   border: 1px solid rgba(107,114,128,.25); }
+
+    /* ── Product Grid ─────────────────────────────────────────── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      transition: border-color .2s, transform .15s;
+    }
+
+    .product-card:hover { border-color: var(--surface-3); transform: translateY(-2px); }
+
+    .product-card .corner-tag {
+      position: absolute;
+      top: 0; right: 0;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 0 28px 28px 0;
+    }
+
+    .corner-green  { border-color: transparent var(--green)  transparent transparent; }
+    .corner-yellow { border-color: transparent var(--yellow) transparent transparent; }
+    .corner-red    { border-color: transparent var(--red)    transparent transparent; }
+    .corner-gray   { border-color: transparent var(--gray)   transparent transparent; }
+    .corner-blue   { border-color: transparent var(--blue)   transparent transparent; }
+
+    .product-name { font-size: 15px; font-weight: 700; margin-bottom: 10px; padding-right: 30px; }
+    .product-meta { font-size: 12px; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+
+    /* ── Priority Cards ───────────────────────────────────────── */
+    .priority-list { display: flex; flex-direction: column; gap: 16px; }
+
+    .priority-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .priority-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      gap: 12px;
+      border-bottom: 1px solid transparent;
+      transition: background .15s;
+    }
+
+    .priority-header:hover { background: var(--surface-2); }
+    .priority-header.open  { border-bottom-color: var(--border); }
+
+    .priority-header-left { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
+
+    .priority-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .priority-title { font-weight: 700; font-size: 14px; line-height: 1.4; }
+
+    .chevron {
+      font-size: 14px;
+      color: var(--text-dim);
+      transition: transform .2s;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .priority-header.open .chevron { transform: rotate(180deg); }
+
+    .priority-body { display: none; padding: 4px 20px 20px; }
+    .priority-body.visible { display: block; }
+
+    /* Frente groups */
+    .frente-group { margin-bottom: 16px; }
+    .frente-group:last-child { margin-bottom: 0; }
+
+    .frente-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .frente-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .subtask-list { display: flex; flex-direction: column; gap: 0; }
+
+    /* Subtasks: linhas limpas sem caixa interna */
+    .subtask {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0 7px 12px;
+      border-left: 2px solid var(--border);
+      margin-bottom: 4px;
+      font-size: 13px;
+      line-height: 1.45;
+      background: none;
+    }
+
+    .subtask:last-child { margin-bottom: 0; }
+
+    .subtask-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+    /* Tag chips dentro de subtasks */
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+
+    .tag-bff     { background: rgba(59,130,246,.15);  color: #60a5fa; border: 1px solid rgba(59,130,246,.25); }
+    .tag-mobile  { background: rgba(34,197,94,.12);   color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
+    .tag-web     { background: rgba(168,85,247,.12);  color: #c084fc; border: 1px solid rgba(168,85,247,.2); }
+    .tag-ux      { background: rgba(245,158,11,.12);  color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
+    .tag-lambda  { background: rgba(239,68,68,.1);    color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+    .tag-dba     { background: rgba(20,184,166,.12);  color: #2dd4bf; border: 1px solid rgba(20,184,166,.2); }
+    .tag-devops  { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.2); }
+    .tag-spark   { background: rgba(251,146,60,.12);  color: #fb923c; border: 1px solid rgba(251,146,60,.2); }
+    .tag-tech    { background: rgba(99,102,241,.12);  color: #818cf8; border: 1px solid rgba(99,102,241,.2); }
+    .tag-front   { background: rgba(168,85,247,.12);  color: #c084fc; border: 1px solid rgba(168,85,247,.2); }
+    .tag-bug     { background: rgba(239,68,68,.12);   color: #f87171; border: 1px solid rgba(239,68,68,.25); }
+    .tag-spike   { background: rgba(245,158,11,.12);  color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
+    .tag-analise { background: rgba(20,184,166,.12);  color: #2dd4bf; border: 1px solid rgba(20,184,166,.2); }
+    .tag-melhoria{ background: rgba(99,102,241,.12);  color: #818cf8; border: 1px solid rgba(99,102,241,.2); }
+    .tag-nft     { background: rgba(107,114,128,.12); color: #9ca3af; border: 1px solid rgba(107,114,128,.2); }
+
+    /* ── Bugs Section ─────────────────────────────────────────── */
+    .bugs-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 20px;
+    }
+
+    .bug-counter {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bug-number {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--yellow);
+      text-shadow: 0 0 30px rgba(245,158,11,.3);
+    }
+
+    .bug-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: .07em; }
+    .bug-period { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+    .bug-right { display: flex; flex-direction: column; gap: 12px; }
+
+    .sev0-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .sev0-card {
+      background: var(--red-bg);
+      border: 1px solid rgba(239,68,68,.3);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .sev0-icon { font-size: 20px; flex-shrink: 0; }
+    .sev0-title { font-weight: 700; font-size: 14px; color: var(--red); }
+    .sev0-incident { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Roadmap Table ────────────────────────────────────────── */
+    .roadmap-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+    thead th {
+      background: var(--surface-2);
+      padding: 11px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-2); }
+
+    td { padding: 12px 16px; vertical-align: top; }
+    td:first-child { font-weight: 600; white-space: nowrap; }
+
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin: 3px 0;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .roadmap-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+
+    .dot-green  { background: var(--green); }
+    .dot-yellow { background: var(--yellow); }
+    .dot-gray   { background: var(--gray); }
+    .dot-red    { background: var(--red); }
+    .dot-blue   { background: var(--blue); }
+
+    /* ── Risk Cards ───────────────────────────────────────────── */
+    .risk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .risk-grid { grid-template-columns: 1fr; }
+    }
+
+    .risk-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .risk-card.risk-high   { border-left-color: var(--red); }
+    .risk-card.risk-medium { border-left-color: var(--yellow); }
+    .risk-card.risk-low    { border-left-color: var(--gray); }
+
+    .risk-product {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .risk-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    .risk-action {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .risk-action-label { font-weight: 700; color: var(--text-muted); white-space: nowrap; }
+
+    /* ── Mission Extra ────────────────────────────────────────── */
+    .mission-card {
+      background: var(--mission-bg);
+      border: 1px solid var(--mission-border-color);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      transition: background .3s, border-color .3s;
+    }
+
+    .mission-title { font-size: 20px; font-weight: 800; color: var(--mission-title-color); }
+    .mission-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    .mission-timeline {
+      display: flex;
+      gap: 0;
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .mission-timeline::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .timeline-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .timeline-dot.done    { background: var(--green);    border-color: var(--green);    color: #fff; }
+    .timeline-dot.paused  { background: var(--gray);     border-color: var(--gray);     color: #fff; }
+    .timeline-dot.unknown { background: var(--surface-2); border-color: var(--border);  color: var(--text-dim); }
+
+    .timeline-label {
+      font-size: 11px;
+      text-align: center;
+      color: var(--text-muted);
+      line-height: 1.3;
+      max-width: 90px;
+    }
+
+    .mission-notes {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .note-item {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .note-item strong {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    /* ── Alert Banners ────────────────────────────────────────── */
+    .alert-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .alert-red    { background: var(--red-bg);    border: 1px solid rgba(239,68,68,.3); }
+    .alert-yellow { background: var(--yellow-bg); border: 1px solid rgba(245,158,11,.3); }
+    .alert-blue   { background: var(--blue-bg);   border: 1px solid rgba(59,130,246,.3); }
+    .alert-gray   { background: var(--gray-bg);   border: 1px solid rgba(107,114,128,.3); }
+
+    .alert-icon { font-size: 18px; flex-shrink: 0; }
+
+    /* ── Divider ──────────────────────────────────────────────── */
+    .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .site-footer p + p { margin-top: 6px; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+      .bugs-layout { grid-template-columns: 1fr; }
+      .hero { padding: 24px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-wrap { padding: 0 12px 60px; }
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .site-header, .nav-bar { position: static; }
+      .priority-body { display: block !important; }
+      .product-tech-body { display: block !important; }
+    }
+
+    /* ── Product Tech Details ─────────────────────────────────── */
+    .product-tech {
+      margin-top: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    .product-tech-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: .04em;
+      cursor: pointer;
+      padding: 2px 0;
+      user-select: none;
+      transition: color .15s;
+    }
+
+    .product-tech-toggle:hover { color: var(--text); }
+
+    .tech-chevron {
+      font-size: 11px;
+      color: var(--text-dim);
+      transition: transform .2s;
+    }
+
+    .tech-chevron.open { transform: rotate(180deg); }
+
+    .product-tech-body {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .tech-section {
+      margin-bottom: 10px;
+    }
+
+    .tech-section:last-child { margin-bottom: 0; }
+
+    .tech-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 4px;
+    }
+
+    .tech-item-icon { flex-shrink: 0; font-size: 11px; margin-top: 1px; }
+
+    .tech-countries {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <span class="squad-badge">C&amp;R</span>
+      <div>
+        <div class="header-title">Squad Crescimento &amp; Retenção</div>
+        <div class="header-subtitle">360 Overview Report &mdash; Q2 2026</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="meta-item">👤 Responsável: <strong style="color:var(--text);margin-left:4px;">Bruno Mansano</strong></div>
+      <div class="meta-item">📅 Maio 2026</div>
+      <div class="meta-item">🔄 Referência: SYNC Q2</div>
+      <button id="theme-toggle" onclick="toggleTheme()" title="Alternar modo claro/escuro">
+        <span class="toggle-icon">🌙</span>
+        <span class="toggle-label">Modo Escuro</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════════════════ -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link active" href="#portfolio">📦 Portfólio</a>
+    <a class="nav-link" href="#prioridades">🎯 Prioridades Q2</a>
+    <a class="nav-link" href="#bugs">🐛 Bugs &amp; Saúde</a>
+    <a class="nav-link" href="#roadmap">🗺️ Roadmap</a>
+    <a class="nav-link" href="#riscos">⚠️ Produtos em Risco</a>
+    <a class="nav-link" href="#missoes">🏆 Missões &amp; Recomp.</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════
+     MAIN
+════════════════════════════════════════════════════════════ -->
+<main class="page-wrap">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <h1>Squad C&amp;R — Vision Q2 2026</h1>
+      <p>Visão executiva do portfólio, prioridades, saúde técnica e itens de atenção para o trimestre. Use este documento para decisões de alocação, priorização e gestão de risco.</p>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--blue)">8</div>
+        <div class="kpi-label">Produtos</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--green)">5</div>
+        <div class="kpi-label">Temas Q2</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-value" style="color:var(--red)">46</div>
+        <div class="kpi-label">Bugs Mai/26</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════
+       SEÇÃO 1 — PORTFÓLIO
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="portfolio">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--blue-bg)">📦</div>
+      <div>
+        <div class="section-title">Portfólio de Produtos</div>
+        <div class="section-desc">8 produtos da squad com status atual</div>
+      </div>
+      <span class="section-number">SEÇÃO 01</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+      <span class="badge badge-green"><span class="badge-dot" style="background:var(--green)"></span>Ativo c/ Roadmap</span>
+      <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
+      <span class="badge badge-blue"><span class="badge-dot" style="background:var(--blue)"></span>Em Transição</span>
+      <span class="badge badge-gray"><span class="badge-dot" style="background:var(--gray)"></span>Pausado</span>
+      <span class="badge badge-red"><span class="badge-dot" style="background:var(--red)"></span>Sem Adoção / Em Risco</span>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- 1 -->
+      <div class="product-card">
+        <div class="corner-tag corner-green"></div>
+        <div class="product-name">Plano de Crescimento CB</div>
+        <span class="badge badge-green"><span class="badge-dot" style="background:var(--green)"></span>Ativo c/ Roadmap</span>
+        <p class="product-meta">Produto principal da squad. Roadmap ativo: desenvolvimento do BKO, CMS (on hold) e ventana anual Diamante em andamento no Q2.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="product-card">
+        <div class="corner-tag corner-yellow"></div>
+        <div class="product-name">Plano de Crescimento Líder</div>
+        <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
+        <p class="product-meta">Sem roadmap previsto. Houve alinhamento de que seria desenvolvido após o NPC CB, porém o projeto não foi priorizado.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="product-card">
+        <div class="corner-tag corner-blue"></div>
+        <div class="product-name">Portal de Benefícios Sociais <span style="color:var(--text-dim);font-size:12px;font-weight:400">/ Prismic</span></div>
+        <span class="badge badge-blue"><span class="badge-dot" style="background:var(--blue)"></span>Em Transição</span>
+        <p class="product-meta">Deverá ser substituído após a implantação do novo CMS para o Plano de Crescimento CB.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="product-card">
+        <div class="corner-tag corner-gray"></div>
+        <div class="product-name">Campanhas</div>
+        <span class="badge badge-gray"><span class="badge-dot" style="background:var(--gray)"></span>Pausado</span>
+        <p class="product-meta">Refactoring previsto para Jul/2025 foi pausado em razão da priorização do NPC CB. Produto antigo e deficitário. Invita &amp; Gana funcional com problemas técnicos; Campanha Objetivo não utilizada há anos.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">⚡</span><span><strong>Motores Spark</strong> — buscam info de CBs indicadas e pedidos, avaliam elegibilidade ao prêmio e geram relatórios com participantes</span></div>
+              <div class="tech-item"><span class="tech-item-icon">🔄</span><span><strong>Jobs Talend</strong> — consolidam dados dos Spark em segmentações para premiação no GSP</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Calendário de ciclos no CMM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicações realizadas no Cadastro/GPP</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Pedidos pagos/aprovados no GSP e réplicas para Masterdata</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Peru · Chile · Colômbia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="product-card">
+        <div class="corner-tag corner-red"></div>
+        <div class="product-name">Apaixonadas</div>
+        <span class="badge badge-red"><span class="badge-dot" style="background:var(--red)"></span>Sem Adoção / Em Risco</span>
+        <p class="product-meta">Sem roadmap previsto. Produto não está sendo utilizado pelas operações. Houve atualizações nos últimos anos, mas ainda é um produto deficitário.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">λ</span><span><strong>Motores Lambda</strong> — recebem indicadores contabilizados pelas Consultoras, identificam períodos de apuração (ventanas), consolidam acumulado pela CB no período, aplicam regras de negócio para classificação da Paixão e comunicam valores para Performance e Segmentação</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Calendário de ciclos no CMM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores de Pontos, Faturamento e Itens por marca no Performance</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Brasil · Peru · Chile · Colômbia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="product-card">
+        <div class="corner-tag corner-yellow"></div>
+        <div class="product-name">Segmentação</div>
+        <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
+        <p class="product-meta">Sem roadmap de evolução previsto. Atendimento apenas de correções de bugs.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">⚡</span><span><strong>Motores Spark</strong> — identificam segmentações e sub-segmentações automáticas (Ativas, Inícios, Inativas, Aniversariantes, etc.)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">🔄</span><span><strong>Jobs Talend</strong> — cria segmentações baseadas nas campanhas para o GSP aplicar prêmios</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores calculados no Performance</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Dados de pessoas no Cadastro/GPP</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Pedidos no GSP e réplicas para Masterdata</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Peru · Chile · Colômbia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="product-card">
+        <div class="corner-tag corner-yellow"></div>
+        <div class="product-name">BRM</div>
+        <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
+        <p class="product-meta">Sem roadmap de evolução previsto. Atendimento apenas de correções de bugs.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="product-card">
+        <div class="corner-tag corner-yellow"></div>
+        <div class="product-name">CMM</div>
+        <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
+        <p class="product-meta">Sem roadmap de evolução previsto. Atendimento apenas de correções de bugs.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════
+       SEÇÃO 2 — PRIORIDADES Q2
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="prioridades">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--green-bg)">🎯</div>
+      <div>
+        <div class="section-title">Prioridades Q2 2026</div>
+        <div class="section-desc">5 temas estratégicos com subtarefas por frente técnica</div>
+      </div>
+      <span class="section-number">SEÇÃO 02</span>
+    </div>
+
+    <div class="priority-list">
+
+      <!-- ── Tema 1 ── CONCLUÍDO ── -->
+      <div class="priority-card">
+        <div class="priority-header open" onclick="togglePriority(this)">
+          <div class="priority-header-left">
+            <div class="priority-num">1</div>
+            <div>
+              <div class="priority-title">Implementação de Pesquisa de Satisfação (CSAT) Integrada ao Plano de Crescimento (Latam)</div>
+              <div style="margin-top:6px;"><span class="badge badge-green"><span class="badge-dot" style="background:var(--green)"></span>Concluído</span></div>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="priority-body visible">
+          <div class="frente-group">
+            <div class="frente-label">BFF</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">✅</span>
+                <span><span class="tag-chip tag-bff">BFF</span> Exibir Pesquisa de Satisfação no Novo Plano de Crescimento</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Mobile</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">✅</span>
+                <span><span class="tag-chip tag-mobile">MOBILE</span> Exibir Pesquisa de Satisfação no Novo Plano de Crescimento (Android)</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">✅</span>
+                <span><span class="tag-chip tag-mobile">MOBILE</span> Exibir Pesquisa de Satisfação no Novo Plano de Crescimento (iOS)</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">UX</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">✅</span>
+                <span><span class="tag-chip tag-ux">UX</span> Coleta de CSAT do Plano de Crescimento</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Web</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">✅</span>
+                <span><span class="tag-chip tag-web">WEB</span> Exibir Pesquisa de Satisfação no Novo Plano de Crescimento</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tema 2 ── EM DESENVOLVIMENTO ── -->
+      <div class="priority-card">
+        <div class="priority-header" onclick="togglePriority(this)">
+          <div class="priority-header-left">
+            <div class="priority-num">2</div>
+            <div>
+              <div class="priority-title">Visibilidade e Progressão Anual Diamante+ (Latam)</div>
+              <div style="margin-top:6px;"><span class="badge badge-blue"><span class="badge-dot" style="background:var(--blue)"></span>Em Desenvolvimento</span></div>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="priority-body">
+          <div class="frente-group">
+            <div class="frente-label">UX</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-ux">UX</span> Ventana anual - Diamante</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">DBA</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-dba">DBA</span> Alterar a tabela consolidated para incluir uma nova coluna com a pontuação faltante para o próximo nível</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Lambda</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-lambda">Lambda2</span> Alterar o processo para gravar os pontos faltantes para o próximo nível</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-lambda">Lambda3</span> Alterar o processo para repassar os pontos faltantes para o próximo nível no tópico Kafka</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">BFF</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-bff">BFF</span> Alterar a query ConsultantLevel para buscar a pontuação faltante para o próximo nível</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Mobile / Web</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-mobile">Mobile</span> Alterar o termômetro de evolução por pontos para incluir as novas informações de acumulado para Diamante</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-web">Web</span> Alterar o termômetro de evolução por pontos para incluir as novas informações de acumulado para Diamante</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tema 3 ── EM DESENVOLVIMENTO ── -->
+      <div class="priority-card">
+        <div class="priority-header" onclick="togglePriority(this)">
+          <div class="priority-header-left">
+            <div class="priority-num">3</div>
+            <div>
+              <div class="priority-title">Criar sistema BackOffice do Novo Plano de Crescimento (Latam)</div>
+              <div style="margin-top:6px;"><span class="badge badge-blue"><span class="badge-dot" style="background:var(--blue)"></span>Em Desenvolvimento</span></div>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="priority-body">
+          <div class="frente-group">
+            <div class="frente-label">UX</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-ux">UX</span> Backoffice Novo Plano de Crescimento</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Spike / Tech</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-spike">SPIKE</span> Revisitar o back-end do novo backoffice</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-tech">TECH</span> Instalação e Configuração Isolada do Design System (DS) no BKO</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Front</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-front">FRONT</span> Criação da Home de Configurações do Plano de Crescimento</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">🔄</span>
+                <span><span class="tag-chip tag-front">FRONT</span> Configuração do período de iniciantes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tema 4 ── BUGS + NFTs ── -->
+      <div class="priority-card">
+        <div class="priority-header" onclick="togglePriority(this)">
+          <div class="priority-header-left">
+            <div class="priority-num">4</div>
+            <div>
+              <div class="priority-title">Bugs + NFTs</div>
+              <div style="margin-top:6px;"><span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Em andamento contínuo</span></div>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="priority-body">
+          <!-- SEV 0 em destaque -->
+          <div style="margin-bottom:14px;">
+            <div class="frente-label">🔴 SEV 0 — Críticos</div>
+            <div class="subtask-list">
+              <div class="subtask" style="border-color:rgba(239,68,68,.35);background:var(--red-bg);">
+                <span class="subtask-icon">🔥</span>
+                <span><span class="tag-chip tag-bug">BUG</span> <strong>[MOTOR]</strong> Travamento do motor de geração de níveis Brasil — Lock em produção &nbsp;<span style="color:var(--text-dim);font-size:11px;">SEV 0 · INC0993369</span></span>
+              </div>
+              <div class="subtask" style="border-color:rgba(239,68,68,.35);background:var(--red-bg);">
+                <span class="subtask-icon">🔥</span>
+                <span><span class="tag-chip tag-bug">BUG</span> <strong>[BR][CALENDÁRIO]</strong> Falha na atualização de CycleGroupID em structure_movement e gap de datas no Setor &nbsp;<span style="color:var(--text-dim);font-size:11px;">SEV 0 · INC0992829</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="frente-group">
+            <div class="frente-label">Spark</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-spark">Spark</span> Desligar os motores de progressão e regressão de níveis das CBs</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-melhoria">Melhoria Técnica</span> <span class="tag-chip tag-spark">Spark</span> Discovery para identificar os motores e iniciarmos o refactoring (incluindo mudança de tecnologia)</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Análise / FinOps</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-analise">Análise</span> Jobs GRP FinOps</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Lambdas</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambdas</span> Processamento de Cancelamentos e Recálculo de Nível</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambda 1</span> Criar fallback para buscar a estrutura da consultora</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambda X</span> Criar nova lambda para buscar as estruturas que estão abrindo</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambda 2</span> Evoluir para utilizar o novo trigger SQS</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambda 3</span> Evoluir para utilizar o novo trigger SQS</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-lambda">Lambda Operational Cycle</span> Otimizar a execução da lambda</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">Plano de Crescimento</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span>Fallback de nível de ciclo para consultoras sem nível no ciclo ativo</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">DevOps / FinOps</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-devops">DevOps</span> <span class="tag-chip tag-analise">FinOps</span> Migrar os microfrontends do k8s para o S3</span>
+              </div>
+            </div>
+          </div>
+          <div class="frente-group">
+            <div class="frente-label">BFF / Devlake / Outros</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-bff">BFF</span> Revisar todo o processo de geração de nível</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span><span class="tag-chip tag-tech">Devlake</span> Aumentar a cobertura de testes unitários dos projetos</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span>Base de retratação por comissionamento incorreto</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">⏳</span>
+                <span>Processamento de pontos extras</span>
+              </div>
+              <div class="subtask">
+                <span class="subtask-icon">🐛</span>
+                <span><span class="tag-chip tag-bug">BUG</span> [iOS] Botão ação "acompanhe seu progresso" não redireciona</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tema 5 ── REFINAMENTO / PAUSADO ── -->
+      <div class="priority-card">
+        <div class="priority-header" onclick="togglePriority(this)">
+          <div class="priority-header-left">
+            <div class="priority-num">5</div>
+            <div>
+              <div class="priority-title">Implementação de CMS Próprio para o Novo Plano de Crescimento (Latam)</div>
+              <div style="margin-top:6px;"><span class="badge badge-gray"><span class="badge-dot" style="background:var(--gray)"></span>Refinamento — Pausado</span></div>
+            </div>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        <div class="priority-body">
+          <div class="frente-group">
+            <div class="frente-label">NFT / Discovery</div>
+            <div class="subtask-list">
+              <div class="subtask">
+                <span class="subtask-icon">⏸️</span>
+                <span><span class="tag-chip tag-nft">NFT</span> Discovery opções CMS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /priority-list -->
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════
+       SEÇÃO 3 — BUGS & SAÚDE
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="bugs">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--red-bg)">🐛</div>
+      <div>
+        <div class="section-title">Bugs &amp; Saúde da Plataforma</div>
+        <div class="section-desc">Volume total de bugs e incidentes críticos SEV 0 — Maio 2026</div>
+      </div>
+      <span class="section-number">SEÇÃO 03</span>
+    </div>
+
+    <div class="alert-banner alert-red">
+      <span class="alert-icon">🚨</span>
+      <div><strong>2 incidentes SEV 0 ativos no período.</strong> Impacto direto no motor de geração de níveis e no calendário de estrutura. Ver detalhes abaixo.</div>
+    </div>
+
+    <div class="bugs-layout">
+
+      <div class="bug-counter">
+        <div class="bug-number">46</div>
+        <div class="bug-label">Bugs em Aberto</div>
+        <div class="bug-period">Maio / 2026</div>
+        <div style="margin-top:14px;width:100%;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding:7px 10px;background:var(--red-bg);border-radius:6px;border:1px solid rgba(239,68,68,.2);">
+            <span style="color:var(--text-muted)">SEV 0</span>
+            <span style="color:var(--red);font-weight:700">2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-right">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">🔴 Incidentes Críticos — SEV 0</div>
+        <div class="sev0-list">
+          <div class="sev0-card">
+            <span class="sev0-icon">💥</span>
+            <div>
+              <div class="sev0-title">[MOTOR] Travamento do motor de geração de níveis Brasil</div>
+              <div class="sev0-incident">Lock em produção &nbsp;·&nbsp; <strong>INC0993369</strong></div>
+            </div>
+          </div>
+          <div class="sev0-card">
+            <span class="sev0-icon">🔥</span>
+            <div>
+              <div class="sev0-title">[BR][CALENDÁRIO] Falha na atualização de CycleGroupID em structure_movement e gap de datas no Setor</div>
+              <div class="sev0-incident"><strong>INC0992829</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maiores Ofensores -->
+        <div style="margin-top:4px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">⚠️ Maiores Ofensores na Lista de Bugs</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:15px;">⚡</span>
+              <span style="font-size:13px;font-weight:600;">Jobs Spark</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:15px;">⚡</span>
+              <span style="font-size:13px;font-weight:600;">Jobs Talend</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:15px;">📦</span>
+              <span style="font-size:13px;font-weight:600;">BRM</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:15px;">📦</span>
+              <span style="font-size:13px;font-weight:600;">CMM</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--yellow);border-radius:var(--radius-sm);">
+              <span style="font-size:15px;">🔁</span>
+              <span style="font-size:13px;font-weight:600;">Progressão de nível <span style="font-size:11px;font-weight:400;color:var(--text-muted);">(legados)</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chamados abertos Mai/26 -->
+        <div style="margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">📋 Chamados Abertos — Maio/26</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:13px;font-weight:600;">GRP Front</span>
+              <span style="font-size:18px;font-weight:800;color:var(--blue);">22</span>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:13px;font-weight:600;">GRP Back</span>
+              <span style="font-size:18px;font-weight:800;color:var(--yellow);">86</span>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--radius-sm);">
+              <span style="font-size:13px;font-weight:600;">CMM &amp; BRM</span>
+              <span style="font-size:18px;font-weight:800;color:var(--red);">167</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Histórico de Bugs Concluídos ──────────────────── -->
+    <div style="margin-top:24px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;">✅ Histórico de Bugs Concluídos — Jun/2025 a Mai/2026</div>
+
+      <!-- Total geral -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:14px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+        <div style="text-align:center;flex-shrink:0;">
+          <div style="font-size:44px;font-weight:900;line-height:1;color:var(--green);text-shadow:0 0 24px rgba(34,197,94,.25);">104</div>
+          <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-top:4px;">Bugs Concluídos</div>
+          <div style="font-size:11px;color:var(--text-dim);margin-top:3px;">01/06/2025 – 22/05/2026</div>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <!-- Q1 2026 -->
+          <div style="margin-bottom:16px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="font-size:13px;font-weight:700;">Q1 2026</span>
+              <span style="font-size:11px;color:var(--text-muted);">91 bugs concluídos</span>
+            </div>
+            <div style="background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--text-muted);line-height:1.5;">
+              Com a entrada em produção do Novo Plano de Crescimento CB, houve uma redução de
+              <strong style="color:var(--green);">70%</strong> dos bugs relacionados ao produto na versão antiga.
+            </div>
+          </div>
+          <!-- Q2 2026 -->
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:13px;font-weight:700;">Q2 2026</span>
+                <span style="font-size:11px;color:var(--text-muted);">(até 22/mai)</span>
+              </div>
+              <span style="font-size:12px;font-weight:700;color:var(--text-muted);">em curso</span>
+            </div>
+            <!-- Grid de métricas Q2 -->
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+              <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--yellow);line-height:1;">13</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Criados</div>
+              </div>
+              <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--green);line-height:1;">5</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Resolvidos</div>
+              </div>
+              <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--gray);line-height:1;">6</div>
+                <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-transform:uppercase;letter-spacing:.05em;">Cancelados</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--text-dim);margin-top:8px;">
+              46 bugs em aberto no momento desta publicação.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════
+       SEÇÃO 4 — ROADMAP POR PRODUTO
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="roadmap">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--purple-bg)">🗺️</div>
+      <div>
+        <div class="section-title">Roadmap por Produto</div>
+        <div class="section-desc">Itens previstos, on hold, sem previsão e contexto por produto</div>
+      </div>
+      <span class="section-number">SEÇÃO 04</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span class="roadmap-dot dot-green"></span> Previsto</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span class="roadmap-dot dot-yellow"></span> On Hold</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span class="roadmap-dot dot-gray"></span> Sem Previsão</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)"><span class="roadmap-dot dot-red"></span> Fora de uso / Problema</span>
+    </div>
+
+    <div class="roadmap-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Previsto / Em Dev</th>
+            <th>On Hold</th>
+            <th>Sem Previsão / Observações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>Plano de Crescimento CB</td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Desenvolvimento do BKO</div>
+              <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Atualização da ventana anual — nível Diamante</div>
+            </td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-yellow"></span>Desenvolvimento do CMS para alteração de conteúdos</div>
+            </td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+          </tr>
+
+          <tr>
+            <td>Plano de Crescimento Líder</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Sem roadmap previsto. Houve alinhamento de que seria desenvolvido após o NPC CB, porém o projeto não foi priorizado.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Portal de Benefícios Sociais (Prismic)</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-yellow"></span>Deverá ser substituído após implantação do novo CMS para o Plano de Crescimento CB.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Campanhas</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-yellow"></span>Refactoring previsto para Jul/2025 — pausado por priorização do NPC CB. Não retomado até o momento.</div>
+            </td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Produto antigo e deficitário. Invita &amp; Gana funcional com problemas técnicos.</div>
+              <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Campanha Objetivo não é utilizada há muitos anos por problemas no produto.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Apaixonadas</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Sem roadmap previsto. Produto não utilizado pelas operações. Produto deficitário apesar de atualizações nos últimos anos.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Segmentação</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Sem roadmap previsto. Apenas correções de bugs.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>BRM</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Sem roadmap previsto. Apenas correções de bugs.</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>CMM</td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td><span style="color:var(--text-dim)">—</span></td>
+            <td>
+              <div class="roadmap-item"><span class="roadmap-dot dot-gray"></span>Sem roadmap previsto. Apenas correções de bugs.</div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════
+       SEÇÃO 5 — PRODUTOS EM RISCO / SEM ROADMAP
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="riscos">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--yellow-bg)">⚠️</div>
+      <div>
+        <div class="section-title">Produtos em Risco / Sem Roadmap</div>
+        <div class="section-desc">Produtos que requerem decisão executiva sobre continuidade ou priorização</div>
+      </div>
+      <span class="section-number">SEÇÃO 05</span>
+    </div>
+
+    <div class="alert-banner alert-yellow">
+      <span class="alert-icon">🔔</span>
+      <div><strong>Decisão necessária:</strong> Vários produtos estão sem roadmap e sem previsão de evolução. Alguns são deficitários ou sem adoção. A ausência de decisão sobre esses produtos mantém custo de manutenção sem retorno claro.</div>
+    </div>
+
+    <div class="risk-grid">
+
+      <div class="risk-card risk-high">
+        <div class="risk-product">
+          <span>Campanhas</span>
+          <span class="badge badge-yellow">Pausado</span>
+        </div>
+        <div class="risk-body">
+          Refactoring previsto para Julho/2025 foi pausado devido à priorização do Novo Plano de Crescimento CB e não foi retomado. Produto antigo e deficitário: Invita &amp; Gana estava funcional mas com tecnologia antiga e muitos problemas; Campanha Objetivo não é utilizada há muitos anos por problemas no produto.
+        </div>
+        <div class="risk-action">
+          <span class="risk-action-label">→ Ação:</span>
+          <span>Definir se o refactoring será retomado e quando, ou se o produto será descontinuado. Decisão pendente de priorização pelo negócio.</span>
+        </div>
+      </div>
+
+      <div class="risk-card risk-high">
+        <div class="risk-product">
+          <span>Apaixonadas</span>
+          <span class="badge badge-red">Sem Adoção</span>
+        </div>
+        <div class="risk-body">
+          Produto sem roadmap previsto e sem utilização pelas operações. Houve atualizações nos últimos anos, mas ainda assim é um produto deficitário. Mantido apenas por inércia técnica.
+        </div>
+        <div class="risk-action">
+          <span class="risk-action-label">→ Ação:</span>
+          <span>Definir formalmente se o produto será descontinuado ou se existe demanda que justifique retomada.</span>
+        </div>
+      </div>
+
+      <div class="risk-card risk-medium">
+        <div class="risk-product">
+          <span>Plano de Crescimento Líder</span>
+          <span class="badge badge-yellow">Sem Priorização</span>
+        </div>
+        <div class="risk-body">
+          Houve alinhamento de que o NPC Líder seria desenvolvido após o NPC CB, porém o projeto não foi priorizado. Sem previsão de desenvolvimento no Q2.
+        </div>
+        <div class="risk-action">
+          <span class="risk-action-label">→ Ação:</span>
+          <span>Confirmar se e quando entra no roadmap, ou comunicar formalmente que não é prioridade no horizonte atual.</span>
+        </div>
+      </div>
+
+      <div class="risk-card risk-low">
+        <div class="risk-product">
+          <span>Segmentação / BRM / CMM</span>
+          <span class="badge badge-gray">Manutenção Reativa</span>
+        </div>
+        <div class="risk-body">
+          Três produtos sem roadmap de evolução — atendidos apenas com correções de bugs. Sem owner dedicado para evolução funcional no Q2.
+        </div>
+        <div class="risk-action">
+          <span class="risk-action-label">→ Ação:</span>
+          <span>Avaliar se há demanda de negócio para evolução destes produtos e incluir no planejamento de capacidade quando aplicável.</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════════════════════
+       EXTRA — MISSÕES & RECOMPENSAS
+  ════════════════════════════════════════════════════ -->
+  <section class="section" id="missoes">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--purple-bg)">🏆</div>
+      <div>
+        <div class="section-title">Missões &amp; Recompensas</div>
+        <div class="section-desc">Histórico do projeto e status atual aguardando retomada pelo time de negócio</div>
+      </div>
+      <span class="section-number">EXTRA</span>
+    </div>
+
+    <div class="mission-card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+        <div>
+          <div class="mission-title">Missões &amp; Recompensas</div>
+          <div class="mission-subtitle">Projeto independente — sem vínculo com o produto CMM</div>
+        </div>
+        <span class="badge badge-gray" style="font-size:13px;padding:6px 14px;">
+          <span class="badge-dot" style="background:var(--gray)"></span>
+          Sem atualizações
+        </span>
+      </div>
+
+      <div class="alert-banner alert-gray" style="margin-bottom:24px;">
+        <span class="alert-icon">ℹ️</span>
+        <div>
+          <strong>Contexto executivo:</strong> No ano passado foram realizadas estimativas de desenvolvimento para este projeto, que a princípio seria desenvolvido no início de 2026. Um piloto estava sendo conduzido pelo time de negócio junto ao parceiro <strong>Loyalme</strong>. Após apresentação das estimativas, o valor ficou alto e o time de negócio decidiu seguir com outro parceiro em caráter de piloto. Não foram recebidas mais atualizações após essa informação.
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">Linha do Tempo</div>
+      <div class="mission-timeline">
+        <div class="timeline-step">
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-label">Estimativas de desenvolvimento realizadas</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-label">Piloto iniciado pelo negócio com Loyalme</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot done">✓</div>
+          <div class="timeline-label">Estimativas apresentadas ao time de negócio</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot paused">✕</div>
+          <div class="timeline-label">Valor alto — negócio decide trocar de parceiro</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-dot unknown">?</div>
+          <div class="timeline-label">Novo piloto com outro parceiro — sem atualizações recebidas</div>
+        </div>
+      </div>
+
+      <div class="mission-notes">
+        <div class="note-item">
+          <strong>Status Atual</strong>
+          Sem atualizações desde a decisão de troca de parceiro pelo time de negócio.
+        </div>
+        <div class="note-item">
+          <strong>Bloqueador</strong>
+          Decisão e andamento estão no domínio do time de negócio. A squad não tem visibilidade do status do novo piloto.
+        </div>
+        <div class="note-item">
+          <strong>Estimativas</strong>
+          Estimativas de esforço já foram apresentadas. Podem necessitar de revisão dependendo do parceiro e escopo final escolhidos.
+        </div>
+        <div class="note-item">
+          <strong>Próximos Passos</strong>
+          Time de negócio deve comunicar evolução do piloto com o novo parceiro para que a squad possa replanejar o desenvolvimento.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <p><strong>Squad C&amp;R — Crescimento &amp; Retenção</strong> &nbsp;·&nbsp; 360 Overview Report &nbsp;·&nbsp; Q2 2026</p>
+  <p style="color:var(--text-dim);margin-top:4px;">Gerado em Maio 2026 &nbsp;·&nbsp; Responsável: Bruno Mansano</p>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Tema Claro / Escuro ──────────────────────────────── */
+  const btn    = document.getElementById('theme-toggle');
+  const html   = document.documentElement;
+
+  function applyTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('cr-report-theme', theme);
+    if (theme === 'light') {
+      btn.querySelector('.toggle-icon').textContent  = '🌙';
+      btn.querySelector('.toggle-label').textContent = 'Modo Escuro';
+    } else {
+      btn.querySelector('.toggle-icon').textContent  = '☀️';
+      btn.querySelector('.toggle-label').textContent = 'Modo Claro';
+    }
+  }
+
+  function toggleTheme() {
+    const current = html.getAttribute('data-theme') || 'dark';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+
+  /* Carrega preferência salva ou usa escuro como padrão */
+  (function () {
+    const saved = localStorage.getItem('cr-report-theme') || 'dark';
+    applyTheme(saved);
+  })();
+
+  /* ── Accordion ────────────────────────────────────────── */
+  function togglePriority(header) {
+    const body   = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+
+    document.querySelectorAll('.priority-header').forEach(h => {
+      h.classList.remove('open');
+      h.nextElementSibling.classList.remove('visible');
+    });
+
+    if (!isOpen) {
+      header.classList.add('open');
+      body.classList.add('visible');
+    }
+  }
+
+  /* ── Nav highlight ao scroll ──────────────────────────── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  /* ── Product Tech Toggle ──────────────────────────────── */
+  function toggleTech(toggleEl) {
+    const body    = toggleEl.nextElementSibling;
+    const chevron = toggleEl.querySelector('.tech-chevron');
+    const isOpen  = body.style.display === 'block';
+    body.style.display = isOpen ? 'none' : 'block';
+    chevron.classList.toggle('open', !isOpen);
+  }
+</script>
+
+</body>
+</html>
