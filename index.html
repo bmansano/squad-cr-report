@@ -949,6 +949,34 @@
         <div class="product-name">Plano de Crescimento CB</div>
         <span class="badge badge-green"><span class="badge-dot" style="background:var(--green)"></span>Ativo c/ Roadmap</span>
         <p class="product-meta">Produto principal da squad. Roadmap ativo: desenvolvimento do BKO, CMS (on hold) e ventana anual Diamante em andamento no Q2.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>DynamoDB</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Scylla</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Lambdas</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>SQS</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>SNS</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>BFF</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores Performance</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Ciclos do CMM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Relação Comercial do BRM</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Todos</div>
+          </div>
+        </div>
       </div>
 
       <!-- 2 -->
@@ -957,6 +985,30 @@
         <div class="product-name">Plano de Crescimento Líder</div>
         <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
         <p class="product-meta">Sem roadmap previsto. Houve alinhamento de que seria desenvolvido após o NPC CB, porém o projeto não foi priorizado.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Talend</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Scylla</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores Performance</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Ciclos do CMM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Relação Comercial do BRM</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Todos</div>
+          </div>
+        </div>
       </div>
 
       <!-- 3 -->
@@ -965,6 +1017,19 @@
         <div class="product-name">Portal de Benefícios Sociais <span style="color:var(--text-dim);font-size:12px;font-weight:400">/ Prismic</span></div>
         <span class="badge badge-blue"><span class="badge-dot" style="background:var(--blue)"></span>Em Transição</span>
         <p class="product-meta">Deverá ser substituído após a implantação do novo CMS para o Plano de Crescimento CB.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Prismic</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>BFF</span></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- 4 -->
@@ -981,17 +1046,21 @@
           <div class="product-tech-body">
             <div class="tech-section">
               <div class="tech-label">Tecnologias Aplicadas</div>
-              <div class="tech-item"><span class="tech-item-icon">⚡</span><span><strong>Motores Spark</strong> — buscam info de CBs indicadas e pedidos, avaliam elegibilidade ao prêmio e geram relatórios com participantes</span></div>
-              <div class="tech-item"><span class="tech-item-icon">🔄</span><span><strong>Jobs Talend</strong> — consolidam dados dos Spark em segmentações para premiação no GSP</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Lambdas</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Scylla</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
             </div>
             <div class="tech-section">
               <div class="tech-label">Dependências</div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Calendário de ciclos no CMM</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicações realizadas no Cadastro/GPP</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Pedidos pagos/aprovados no GSP e réplicas para Masterdata</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Ciclos CMM</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Evento pedido GSP → Performance</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Evento cadastro aprovado (cadwf)</span></div>
             </div>
-            <div class="tech-countries">🌎 Países: Peru · Chile · Colômbia</div>
+            <div class="tech-countries">🌎 Países: Peru · México · Argentina (entre V1 e V2)</div>
           </div>
         </div>
       </div>
@@ -1010,15 +1079,20 @@
           <div class="product-tech-body">
             <div class="tech-section">
               <div class="tech-label">Tecnologias Aplicadas</div>
-              <div class="tech-item"><span class="tech-item-icon">λ</span><span><strong>Motores Lambda</strong> — recebem indicadores contabilizados pelas Consultoras, identificam períodos de apuração (ventanas), consolidam acumulado pela CB no período, aplicam regras de negócio para classificação da Paixão e comunicam valores para Performance e Segmentação</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Talend</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Lambda</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Scylla</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
             </div>
             <div class="tech-section">
               <div class="tech-label">Dependências</div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Calendário de ciclos no CMM</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores de Pontos, Faturamento e Itens por marca no Performance</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores Performance</span></div>
             </div>
-            <div class="tech-countries">🌎 Países: Brasil · Peru · Chile · Colômbia</div>
+            <div class="tech-countries">⚠️ Não configurado desde a entrada de ELO</div>
           </div>
         </div>
       </div>
@@ -1037,17 +1111,20 @@
           <div class="product-tech-body">
             <div class="tech-section">
               <div class="tech-label">Tecnologias Aplicadas</div>
-              <div class="tech-item"><span class="tech-item-icon">⚡</span><span><strong>Motores Spark</strong> — identificam segmentações e sub-segmentações automáticas (Ativas, Inícios, Inativas, Aniversariantes, etc.)</span></div>
-              <div class="tech-item"><span class="tech-item-icon">🔄</span><span><strong>Jobs Talend</strong> — cria segmentações baseadas nas campanhas para o GSP aplicar prêmios</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Scylla</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Lambdas</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Talend</span></div>
             </div>
             <div class="tech-section">
               <div class="tech-label">Dependências</div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>CBs cadastradas no BRM</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Indicadores calculados no Performance</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Dados de pessoas no Cadastro/GPP</span></div>
-              <div class="tech-item"><span class="tech-item-icon">•</span><span>Pedidos no GSP e réplicas para Masterdata</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Masterdata (Pedidos, Indicadores)</span></div>
             </div>
-            <div class="tech-countries">🌎 Países: Peru · Chile · Colômbia</div>
+            <div class="tech-countries">🌎 Países: Todos</div>
           </div>
         </div>
       </div>
@@ -1058,6 +1135,28 @@
         <div class="product-name">BRM</div>
         <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
         <p class="product-meta">Sem roadmap de evolução previsto. Atendimento apenas de correções de bugs.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias &amp; Dependências</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
+            </div>
+            <div class="tech-section">
+              <div class="tech-label">Dependências</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Alocação Cadastro</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Evento de Ativação do Performance</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Todos</div>
+          </div>
+        </div>
       </div>
 
       <!-- 8 -->
@@ -1066,6 +1165,23 @@
         <div class="product-name">CMM</div>
         <span class="badge badge-yellow"><span class="badge-dot" style="background:var(--yellow)"></span>Ativo s/ Roadmap</span>
         <p class="product-meta">Sem roadmap de evolução previsto. Atendimento apenas de correções de bugs.</p>
+        <div class="product-tech">
+          <div class="product-tech-toggle" onclick="toggleTech(this)">
+            <span>⚙️ Tecnologias</span>
+            <span class="tech-chevron">▾</span>
+          </div>
+          <div class="product-tech-body">
+            <div class="tech-section">
+              <div class="tech-label">Tecnologias Aplicadas</div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Postgres</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>API (Node)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>Frontend (React)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>EMR (Spark)</span></div>
+              <div class="tech-item"><span class="tech-item-icon">•</span><span>MSK</span></div>
+            </div>
+            <div class="tech-countries">🌎 Países: Todos</div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1492,19 +1608,35 @@
             </div>
             <div style="display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--yellow);border-radius:var(--radius-sm);">
               <span style="font-size:15px;">🔁</span>
-              <span style="font-size:13px;font-weight:600;">Progressão de nível <span style="font-size:11px;font-weight:400;color:var(--text-muted);">(legados)</span></span>
+              <span style="font-size:13px;font-weight:600;">Progressão de nível</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Chamados abertos Abr/26 -->
+        <div style="margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">📋 Chamados Abertos — Abril/26</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+            <div>
+              <span style="font-size:18px;font-weight:800;color:var(--yellow);">444</span>
+              <span style="font-size:11px;color:var(--green);font-weight:600;margin-left:8px;">↓ -10% vs. Março/26</span>
+            </div>
+            <span style="font-size:11px;color:var(--text-muted);">total</span>
           </div>
         </div>
 
         <!-- Chamados abertos Mai/26 -->
         <div style="margin-top:16px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">📋 Chamados Abertos — Maio/26</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">📋 Chamados Abertos — Maio/26 <span style="font-weight:400;font-size:10px;color:var(--text-dim);">(até o momento)</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;">
+            <span style="font-size:13px;font-weight:700;">Total</span>
+            <span style="font-size:18px;font-weight:800;color:var(--blue);">275</span>
+          </div>
           <div style="display:flex;flex-direction:column;gap:6px;">
 
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
-              <span style="font-size:13px;font-weight:600;">GRP Front</span>
-              <span style="font-size:18px;font-weight:800;color:var(--blue);">22</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--radius-sm);">
+              <span style="font-size:13px;font-weight:600;">CMM &amp; BRM</span>
+              <span style="font-size:18px;font-weight:800;color:var(--red);">167</span>
             </div>
 
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
@@ -1512,9 +1644,9 @@
               <span style="font-size:18px;font-weight:800;color:var(--yellow);">86</span>
             </div>
 
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--radius-sm);">
-              <span style="font-size:13px;font-weight:600;">CMM &amp; BRM</span>
-              <span style="font-size:18px;font-weight:800;color:var(--red);">167</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-sm);">
+              <span style="font-size:13px;font-weight:600;">GRP Front</span>
+              <span style="font-size:18px;font-weight:800;color:var(--blue);">22</span>
             </div>
 
           </div>
