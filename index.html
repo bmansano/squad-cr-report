@@ -215,6 +215,9 @@
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
       overflow-x: auto;
+      position: sticky;
+      top: 0;          /* ajustado via JS para ficar logo abaixo do header */
+      z-index: 99;
     }
 
     .nav-inner {
@@ -2061,6 +2064,17 @@
   }, { rootMargin: '-30% 0px -60% 0px' });
 
   sections.forEach(s => observer.observe(s));
+
+  /* ── Nav sticky abaixo do header ─────────────────────── */
+  const siteHeader = document.querySelector('.site-header');
+  const navBar     = document.querySelector('.nav-bar');
+
+  function updateNavTop() {
+    navBar.style.top = siteHeader.offsetHeight + 'px';
+  }
+
+  updateNavTop();
+  window.addEventListener('resize', updateNavTop);
 
   /* ── Product Tech Toggle ──────────────────────────────── */
   function toggleTech(toggleEl) {
